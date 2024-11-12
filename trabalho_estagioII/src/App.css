@@ -1,3 +1,12 @@
+.container1 {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 50px auto;
+  text-align: center;
+}
+
 .container2 {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 20px;

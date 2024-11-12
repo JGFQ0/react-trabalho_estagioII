@@ -1,32 +1,32 @@
 
 export default function ConteudoPag1() {
     return (
-        <>
+        <div className="container1">
         <h1>Agendamento de Quadra Esportiva</h1>
         <form id="agendForm">
             <fieldset>
-                <div class="row">
-                    <div class="column">
-                        <label for="nome">Nome:</label>
-                        <input class="opções" type="text" id="nome" name="nome" placeholder="Escreva seu nome..." required/>
+                <div className="row">
+                    <div className="column">
+                        <label htmlFor="nome">Nome:</label>
+                        <input className="opções" type="text" id="nome" name="nome" placeholder="Escreva seu nome..." required/>
                     </div>
-                    <div class="column">
-                        <label for="esporte">Esportes </label>
-                        <select class="opções" id="esporte" name="esporte" required>
+                    <div className="column">
+                        <label htmlFor="esporte">Esportes </label>
+                        <select className="opções" id="esporte" name="esporte" required>
                             <option value="Futebol">Futebol</option>
                             <option value="Vôlei">Vôlei</option>
                         </select>
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="column">
-                        <label for="data">Data:</label>
-                        <input class="opções" type="date" id="data" name="data" required/>
+                <div className="row">
+                    <div className="column">
+                        <label htmlFor="data">Data:</label>
+                        <input className="opções" type="date" id="data" name="data" required/>
                     </div>
-                    <div class="column">
-                        <label for="horario">Horários Disponíveis:</label>
-                        <select class="opções" id="horario" name="horario" required>
+                    <div className="column">
+                        <label htmlFor="horario">Horários Disponíveis:</label>
+                        <select className="opções" id="horario" name="horario" required>
                                 <option value="08:00">08:00</option>
                                 <option value="09:00">09:00</option>
                                 <option value="16:00">16:00</option>
@@ -34,12 +34,12 @@ export default function ConteudoPag1() {
                         </select>
                     </div>
                 </div>
-            <button class="botões" type="submit" onClick={Agendar}>Agendar</button>
-            <a href="agendamentos.html"><button class="botões" type="button">Ver Agendamentos {'>>>'}</button></a>
+            <button className="botões" type="submit" onClick={Agendar}>Agendar</button>
+            <a href="agendamentos.html"><button className="botões" type="button">Ver Agendamentos {'>>>'}</button></a>
             </fieldset>
         </form>
-        </>
-    );
+        </div>
+    )
 }
 
 function Agendar() {

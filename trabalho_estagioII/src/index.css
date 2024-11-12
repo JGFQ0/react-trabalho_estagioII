@@ -2,15 +2,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
-  background: url('C:\Users\gaabr\OneDrive\Documentos\!Programação\Javascript\trabalho_estagioII\src\assets\background.jpg') no-repeat center center fixed;
+  background: url('./assets/background.jpg') no-repeat center center fixed;
   background-size: cover;
-}
-
-#root {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 600px;
-  margin: 50px auto;
-  text-align: center;
 }
