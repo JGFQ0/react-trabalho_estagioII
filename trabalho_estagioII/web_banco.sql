@@ -31,7 +31,6 @@ CREATE TABLE `agendamentos` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `esporte` varchar(255) NOT NULL,
-  `esporte_id` int(11) NOT NULL,
   `data` date NOT NULL,
   `horario` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -64,8 +63,7 @@ INSERT INTO `esportes` (`id`, `esporte_nome`, `preco`) VALUES
 -- Índices de tabela `agendamentos`
 --
 ALTER TABLE `agendamentos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_agend_esp` (`esporte_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `esportes`
@@ -96,9 +94,6 @@ ALTER TABLE `esportes`
 --
 -- Restrições para tabelas `agendamentos`
 --
-ALTER TABLE `agendamentos`
-  ADD CONSTRAINT `fk_agend_esp` FOREIGN KEY (`esporte_id`) REFERENCES `esportes` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

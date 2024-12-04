@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <label>Horário:</label>
                     </div>
                     <select class="opções2" disabled>
-                        <option value="08:00" ${item.horario === '08:00:00' ? 'selected' : ''}>08:00</option>
-                        <option value="09:00" ${item.horario === '09:00:00' ? 'selected' : ''}>09:00</option>
-                        <option value="16:00" ${item.horario === '16:00:00' ? 'selected' : ''}>16:00</option>
-                        <option value="17:00" ${item.horario === '17:00:00' ? 'selected' : ''}>17:00</option>
+                        <option value="08:00:00" ${item.horario === '08:00:00' ? 'selected' : ''}>08:00</option>
+                        <option value="09:00:00" ${item.horario === '09:00:00' ? 'selected' : ''}>09:00</option>
+                        <option value="16:00:00" ${item.horario === '16:00:00' ? 'selected' : ''}>16:00</option>
+                        <option value="17:00:00" ${item.horario === '17:00:00' ? 'selected' : ''}>17:00</option>
                     </select>
                 </div>
                 <button class="btnEditar" onclick="editarAgendamentos(${item.id})">Editar</button>
