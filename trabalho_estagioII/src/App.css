@@ -106,12 +106,12 @@ input, select {
   background-color: #282188;
 }
 .campoBuscar{
-  margin-left: 24%;
   width: 50%;
+  text-align: center;
+  margin: 0 auto ;
 }
 
-.campoBuscar input{
-  border: 1px solid grey;
+#inputBuscar {
   text-align: center;
 }
 

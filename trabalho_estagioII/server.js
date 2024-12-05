@@ -26,17 +26,24 @@ db.connect((err) => {
 app.post('/agendamento', (req, res) => {
     const { nome, data, horario, esporte } = req.body
 
-    //Checar registros parecidos:
+    // Checar registros parecidos:
     const checarRegParecidos = 'SELECT * FROM agendamentos WHERE data = ? AND horario = ?'
     db.query(checarRegParecidos, [data, horario], (err, results) => {
-       
-        //Estrutura condicional que checa os registros parecidos
-        if (results.length > 0) {
-            return res.status(401).json({ message: 'DATA e HORÁRIO já foram registrados anteriormente no banco de dados.'})
+        if (err) {
+            console.error('Erro ao consultar o banco de dados:', err)
+            return res.status(500).json({ message: 'Erro ao consultar o banco de dados' })
         }
-        else {
+
+        // Estrutura condicional que checa os registros parecidos
+        if (results.length > 0) {
+            return res.status(401).json({ message: 'DATA e HORÁRIO já foram registrados anteriormente.' });
+        } else {
             const query = 'INSERT INTO agendamentos (nome, data, horario, esporte) VALUES (?, ?, ?, ?)'
             db.query(query, [nome, data, horario, esporte], (err, result) => {
+                if (err) {
+                    console.error('Erro ao inserir agendamento:', err)
+                    return res.status(500).json({ message: 'Erro ao inserir agendamento' })
+                }
                 res.json({ message: 'Agendamento realizado com sucesso!' })
             })
         }
@@ -63,20 +70,25 @@ app.put('/agendamento/:id', (req, res) => {
     const { nome, data, horario, esporte } = req.body
     const { id } = req.params
 
-    //Checar registros parecidos:
-    const checarRegParecidos = 'SELECT * FROM agendamentos WHERE data = ? AND horario = ?'
-    db.query(checarRegParecidos, [data, horario], (err, results) => {
-           
-        //Estrutura condicional que checa os registros parecidos
-        if (results.length > 0) {
-            return res.status(401).json({ message: 'DATA e HORÁRIO já foram registrados anteriormente no banco de dados.'})
+    // Checar registros parecidos, mas excluir o próprio agendamento (id != ?)
+    const checarRegParecidos = 'SELECT * FROM agendamentos WHERE data = ? AND horario = ? AND id != ?'
+    db.query(checarRegParecidos, [data, horario, id], (err, results) => {
+        if (err) {
+            console.error('Erro ao consultar o banco de dados:', err);
+            return res.status(500).json({ message: 'Erro ao consultar o banco de dados' })
         }
-        //Obs: Não consegue realizar a atualização de dados pois se já existir um...
-        //...registro parecido mesmo que seja um item correspondente ao registro no banco...
-        //...o código não permite atualizar.
-        else {
+
+        // Se houver outro agendamento com a mesma data e horário, mas com id diferente, retorna erro
+        if (results.length > 0) {
+            return res.status(401).json({ message: 'DATA e HORÁRIO já foram registrados anteriormente' })
+        } else {
+            // Caso contrário, faz a atualização do agendamento
             const query = 'UPDATE agendamentos SET nome = ?, data = ?, horario = ?, esporte = ? WHERE id = ?'
             db.query(query, [nome, data, horario, esporte, id], (err, result) => {
+                if (err) {
+                    console.error('Erro ao atualizar agendamento:', err)
+                    return res.status(500).json({ message: 'Erro ao atualizar agendamento' })
+                }
                 res.json({ message: 'Agendamento atualizado com sucesso!' })
             })
         }

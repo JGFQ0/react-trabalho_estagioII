@@ -1,12 +1,26 @@
 import { useState } from 'react'
 import './App.css'
 import BtnAgendar from './components/BtnAgendar'
+import { formatDate } from "./utils/dateUtils"
+import { esportes, horas } from "./utils/consts"
+import MensagemSucErro from './components/MensagemSucErro'
 
 export default function App() {
     const [nome, setNome] = useState('')
-    const [esporte, setEsporte] = useState('')
-    const [data, setData] = useState('')
-    const [horario, setHorario] = useState('')
+    const [esporte, setEsporte] = useState(esportes.FUTEBOL)
+    const [data, setData] = useState(new Date())
+    const [horario, setHorario] = useState(horas.HORA_8)
+    const [mensagem, setMensagem] = useState('')
+    const [mensagemTipo, setMensagemTipo] = useState('')
+    const [contadorSucessos, setContadorSucessos] = useState(0)
+
+    const handleMensagem = (tipo, texto) => {
+        if (tipo === 'sucesso') {
+            setContadorSucessos(prevCount => prevCount + 1)
+        }
+        setMensagemTipo(tipo)
+        setMensagem(texto)
+    }
 
     return (
         <>
@@ -37,8 +51,9 @@ export default function App() {
                                 id="esporte" 
                                 name="esporte" 
                                 required>
-                                    <option value = "Futebol">Futebol</option>
-                                    <option value = "Vôlei">Vôlei</option>
+                                    {
+                                        Object.keys(esportes).map(esporteKey => <option key={esporteKey} value={esportes[esporteKey]}>{esportes[esporteKey]}</option>)
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -48,7 +63,7 @@ export default function App() {
                                 <label htmlFor="data">Data:</label>
                                 <input 
                                 onChange={(e) => setData(e.target.value)}
-                                value={data}
+                                value={formatDate(data)}
                                 className="opções" 
                                 type="date" 
                                 id="data" 
@@ -64,17 +79,23 @@ export default function App() {
                                 id="horario" 
                                 name="horario" 
                                 required>
-                                    <option value="08:00:00">08:00</option>
-                                    <option value="09:00:00">09:00</option>
-                                    <option value="16:00:00">16:00</option>
-                                    <option value="17:00:00">17:00</option>
+                                    {
+                                        Object.keys(horas).map(horaKey => <option key={horaKey} value={horas[horaKey]}>{horas[horaKey]}</option>)
+                                    }
                                 </select>
                             </div>
                         </div>
-                        <BtnAgendar nome={nome} esporte={esporte} horario={horario} data={data}/>
+                        <BtnAgendar 
+                        nome={nome} 
+                        esporte={esporte} 
+                        horario={horario} 
+                        data={data}
+                        onMensagem={handleMensagem}
+                        />
                         <a href='Page2.html'><button className="botões" type="button">Ver Agendamentos {'>>>'}</button></a>
                     </fieldset>
                 </form>
+                <MensagemSucErro tipo={mensagemTipo} mensagem={mensagem} contadorSucessos={contadorSucessos} />
             </div>
         </>
     )

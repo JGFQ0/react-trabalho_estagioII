@@ -32,7 +32,7 @@ CREATE TABLE `agendamentos` (
   `nome` varchar(255) NOT NULL,
   `esporte` varchar(255) NOT NULL,
   `data` date NOT NULL,
-  `horario` time NOT NULL
+  `horario` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
