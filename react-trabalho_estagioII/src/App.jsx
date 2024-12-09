@@ -6,6 +6,8 @@ import { esportes, horas } from "./utils/consts"
 import MensagemSucErro from './components/MensagemSucErro'
 
 export default function App() {
+    // useStates responsáveis por atualizar o estado dos componentes desta função.
+    // Ex: "nome" é o estado atual do componente, setNome é a função que irá atualizar o estado desta varíavel
     const [nome, setNome] = useState('')
     const [esporte, setEsporte] = useState(esportes.FUTEBOL)
     const [data, setData] = useState(new Date())
@@ -31,7 +33,9 @@ export default function App() {
                         <div className="row">
                             <div className="column">
                                 <label htmlFor="nome">Nome:</label>
-                                <input 
+                                <input
+                                // useState sendo utilizado aqui para mudar o valor de "nome"...
+                                // assim que o usuário escrever algo no input.
                                     onChange={(e) => setNome(e.target.value)}
                                     className="opções" 
                                     type="text" 

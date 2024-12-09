@@ -25,14 +25,13 @@ export default function AgendLista() {
     }
 
     useEffect(() => {
-        fetchAgendamentos();
-        window.addEventListener('carregar-agendamentos', fetchAgendamentos);
+        fetchAgendamentos()
+        window.addEventListener('carregar-agendamentos', fetchAgendamentos)
     
         return () => {
-            // Cleanup the event listener when the component is unmounted
-            window.removeEventListener('carregar-agendamentos', fetchAgendamentos);
-        };
-    }, []);
+            window.removeEventListener('carregar-agendamentos', fetchAgendamentos)
+        }
+    }, [])
 
     return (
         <>
@@ -99,7 +98,8 @@ function AgendItem({item, setAgendamentos}) {
         });
     
         if(response.ok) {
-            // Atualiza o estado removendo o item deletado
+            // Atualiza o estado removendo o item deletado e evita com que todos...
+            // ...os outros agendamentos sejam apagados da página.
             setAgendamentos((prevAgendamentos) => 
                 prevAgendamentos.filter(agendamento => agendamento.id !== item.id)
             );

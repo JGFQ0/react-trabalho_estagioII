@@ -70,7 +70,7 @@ app.put('/agendamento/:id', (req, res) => {
     const { nome, data, horario, esporte } = req.body
     const { id } = req.params
 
-    // Checar registros parecidos, mas excluir o próprio agendamento (id != ?)
+    // Checar registros parecidos, mas excluir o próprio agendamento da busca (id != ?)
     const checarRegParecidos = 'SELECT * FROM agendamentos WHERE data = ? AND horario = ? AND id != ?'
     db.query(checarRegParecidos, [data, horario, id], (err, results) => {
         if (err) {

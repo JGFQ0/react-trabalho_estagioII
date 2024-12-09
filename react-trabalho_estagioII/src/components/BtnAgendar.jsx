@@ -3,6 +3,9 @@ export default function BtnAgendar({nome, esporte, horario, data, onMensagem}) {
         event.preventDefault()
         event.stopPropagation()
 
+        // Variáveis com a função de ajudar na busca por registros parecidos...
+        // ...sem elas, o código iria permitir com que o usuário marcasse horários...
+        // ... iguais a outros já existentes no banco.
         const formattedData = new Date(data).toISOString().split('T')[0]
         const formattedHorario = horario.toString().trim()
         
